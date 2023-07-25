@@ -57,7 +57,7 @@ function createChronoStore() {
 						title: 'my first chrono',
 						duration: 10,
 						pauseOnFinish: false,
-						color: '#4e8',
+						color: '#44ee88',
 						skipRepetitions: []
 					},
 					{
@@ -65,7 +65,7 @@ function createChronoStore() {
 						title: 'second',
 						duration: 10,
 						pauseOnFinish: true,
-						color: '#f00',
+						color: '#ff0000',
 						skipRepetitions: []
 					},
 					{
@@ -73,7 +73,7 @@ function createChronoStore() {
 						title: 'third',
 						duration: 10,
 						pauseOnFinish: false,
-						color: '#f0f',
+						color: '#ff00ff',
 						skipRepetitions: []
 					},
 					{
@@ -86,7 +86,7 @@ function createChronoStore() {
 								title: 'INSIDE LOOP XD',
 								duration: 10,
 								pauseOnFinish: false,
-								color: '#fff',
+								color: '#ffffff',
 								skipRepetitions: []
 							}
 						]

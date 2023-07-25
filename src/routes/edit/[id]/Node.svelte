@@ -11,8 +11,9 @@
 	{/each}
 {:else}
 	<div>
+		<input type="color" class="w-12 h-12" bind:value={node.color} />
 		<input
-			class="bg-transparent border border-white border-solid rounded"
+			class="w-20 bg-transparent border border-white border-solid rounded"
 			type="number"
 			min={0}
 			bind:value={node.duration}
