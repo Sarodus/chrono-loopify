@@ -33,7 +33,7 @@
 					</div>
 
 					<a
-						href="/chrono/{chrono.id}?play"
+						href="/chrono/{chrono.id}?play=1"
 						class="p-2.5 rounded-full hover:bg-white/10 aspect-square w-14 active:bg-white/30"
 					>
 						<svg
