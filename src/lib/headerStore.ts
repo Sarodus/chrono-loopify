@@ -9,12 +9,34 @@ export type HeaderStoreTypes = {
     selected: string[]
 }
 
-const headerStore = writable<HeaderStoreTypes>({
-    size: 'md',
-    route: 'main',
+type ActionHandler = (action: string) => any
 
-    search: '',
-    selected: []
-})
+function createHeaderStore() {
 
+    const store = writable<HeaderStoreTypes>({
+        size: 'md',
+        route: 'main',
+
+        search: '',
+        selected: []
+    })
+
+    let handler: ActionHandler
+
+    function sendAction(action: string) {
+        handler?.(action)
+    }
+
+    function setHandler(_handler: ActionHandler) {
+        handler = _handler;
+    }
+
+    return {
+        ...store,
+        sendAction,
+        setHandler
+    }
+}
+
+const headerStore = createHeaderStore();
 export default headerStore

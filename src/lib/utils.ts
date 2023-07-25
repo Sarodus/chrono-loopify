@@ -59,21 +59,25 @@ export function timeToText(time: number) {
 export function getSequentialTimeNodeFromChronoNode(
 	nodes: ChronoNode[],
 	parentTitle: string = '',
-	deep: number = 0
+	deep: number = 0,
+	repetition?: number
 ): TimeNode[] {
 	const result: TimeNode[] = [];
 	for (let i = 0; i < nodes.length; i++) {
 		const node = nodes[i];
 		if (node.isLoop) {
-			const subnodes = getSequentialTimeNodeFromChronoNode(node.nodes, node.title, deep + 1);
-			result.push(...subnodes);
+			const repetitions: TimeNode[] = []
+			for (let r = 0; r < node.loops; r++) {
+				repetitions.push(...getSequentialTimeNodeFromChronoNode(node.nodes, node.title, deep + 1, r));
+			}
+			result.push(...repetitions.map((s, r) => ({ ...s, repetition: r + 1, totalRepetitions: repetitions.length })));
 		} else {
 			if (parentTitle) {
 				node.parentTitle = parentTitle;
 			}
 			node.deep = deep;
-            node.totalTime = result.reduce((total, node) => total + node.duration, 0)
-			if (!node.skipRepetitions.includes(i)) {
+			node.totalTime = result.reduce((total, node) => total + node.duration, 0)
+			if (!repetition || repetition && !node.skipRepetitions.includes(repetition)) {
 				result.push(node);
 			}
 		}

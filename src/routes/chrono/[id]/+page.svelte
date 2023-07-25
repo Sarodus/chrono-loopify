@@ -25,6 +25,9 @@
 		}
 		await tick();
 		nodes = getSequentialTimeNodeFromChronoNode(chrono.nodes);
+
+		console.log('nodes', nodes);
+
 		steps = getStepsFromTimeNodes(nodes);
 		totalTime = getTotalTimeFromTimeNodes(nodes);
 		setNode(0);
@@ -105,6 +108,11 @@
 					<h5 class="text-3xl">
 						{currentNode.parentTitle}
 					</h5>
+				{/if}
+				{#if currentNode.totalRepetitions}
+					<h6 class="text-2xl">
+						{currentNode.repetition} / {currentNode.totalRepetitions}
+					</h6>
 				{/if}
 			</div>
 			<div class="text-9xl">

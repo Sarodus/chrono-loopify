@@ -2,6 +2,7 @@
 	import { fade } from 'svelte/transition';
 	import headerStore, { type HeaderStoreTypes } from './headerStore';
 	import Search from './Search.svelte';
+	import { page } from '$app/stores';
 
 	let searchOpen = false;
 
@@ -42,7 +43,6 @@
 						EDIT
 					</a>
 				{/if}
-				<button class="h-full px-4 hover:bg-white/10 active:bg-white/30">OTHER OPTIONS</button>
 				<button on:click={onCancel} class="h-full px-4 hover:bg-white/10 active:bg-white/30">
 					CANCEL
 				</button>
@@ -50,9 +50,31 @@
 				<Search bind:open={searchOpen} bind:value={$headerStore.search} />
 			{/if}
 		{:else if $headerStore.route === 'chrono'}
-			<button class="h-full px-4 hover:bg-white/10 active:bg-white/30">OTHER OPTIONS</button>
+			<a
+				href="/edit/{$page.params.id}"
+				class="flex items-center justify-center h-full px-4 hover:bg-white/10 active:bg-white/30"
+			>
+				EDIT
+			</a>
 		{:else if $headerStore.route === 'edit'}
-			<button class="h-full px-4 hover:bg-white/10 active:bg-white/30">OTHER OPTIONS</button>
+			<button
+				on:click={() => headerStore.sendAction('add-loop')}
+				class="h-full px-4 hover:bg-white/10 active:bg-white/30"
+			>
+				Add loop
+			</button>
+			<button
+				on:click={() => headerStore.sendAction('add-chrono')}
+				class="h-full px-4 hover:bg-white/10 active:bg-white/30"
+			>
+				Add chrono
+			</button>
+			<a
+				href="/chrono/{$page.params.id}?play=1"
+				class="flex items-center justify-center h-full px-4 hover:bg-white/10 active:bg-white/30"
+			>
+				Start
+			</a>
 		{/if}
 	</div>
 </div>

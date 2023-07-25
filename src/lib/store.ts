@@ -21,6 +21,8 @@ export type TimeNode = {
 	parentTitle?: string;
 	deep?: number;
 	totalTime?: number
+	repetition?: number;
+	totalRepetitions?: number;
 };
 
 export type LoopNode = {
@@ -29,6 +31,8 @@ export type LoopNode = {
 	loops: number;
 	nodes: ChronoNode[];
 };
+
+const CHRONOS_KEY = 'CHRONOS_KEY';
 
 function createChronoStore() {
 	const store = writable<ChronoRecord[]>([]);
@@ -45,75 +49,29 @@ function createChronoStore() {
 		return id;
 	}
 
-	function init() {
-		store.set([
-			{
-				id: 'cb0f2e35-0584-420a-bd11-8002295337e8',
-				title: 'Workout',
-				description: 'This is the description',
-				nodes: [
-					{
-						isLoop: false,
-						title: 'my first chrono',
-						duration: 10,
-						pauseOnFinish: false,
-						color: '#44ee88',
-						skipRepetitions: []
-					},
-					{
-						isLoop: false,
-						title: 'second',
-						duration: 10,
-						pauseOnFinish: true,
-						color: '#ff0000',
-						skipRepetitions: []
-					},
-					{
-						isLoop: false,
-						title: 'third',
-						duration: 10,
-						pauseOnFinish: false,
-						color: '#ff00ff',
-						skipRepetitions: []
-					},
-					{
-						isLoop: true,
-						title: 'LOOP NODE',
-						loops: 5,
-						nodes: [
-							{
-								isLoop: false,
-								title: 'INSIDE LOOP XD',
-								duration: 10,
-								pauseOnFinish: false,
-								color: '#ffffff',
-								skipRepetitions: []
-							}
-						]
-					}
-				]
-			},
-			{
-				id: uuid(),
-				title: 'Exercice',
-				description: 'This is the description',
-				nodes: []
-			},
-			{
-				id: uuid(),
-				title: 'Yaaas',
-				description: 'This is the description',
-				nodes: []
-			}
-		]);
+	function saveChrono(chrono: ChronoRecord) {
+		chronoStore.update((chronos) => {
+			const index = chronos.findIndex(c => c.id === chrono.id)
+			chronos[index] = chrono;
+			localStorage.setItem(CHRONOS_KEY, JSON.stringify(chronos))
+			return chronos;
+		})
 	}
+
+	function init() {
+		store.set(
+			JSON.parse(localStorage.getItem(CHRONOS_KEY) || '[]') || []
+		)
+	}
+
 	if (browser) {
 		init();
 	}
 
 	return {
 		...store,
-		createEmptyChrono
+		createEmptyChrono,
+		saveChrono
 	};
 }
 

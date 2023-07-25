@@ -11,7 +11,12 @@
 	{#each $chronoStore as chrono (chrono.id)}
 		{#if !$headerStore.search || chrono.title.includes($headerStore.search) || chrono.description.includes($headerStore.search)}
 			<div transition:fade={{ duration: 100 }} class="grid grid-cols-[50px_1fr] gap-4">
-				<input bind:group={$headerStore.selected} value={chrono.id} type="checkbox" />
+				<input
+					class="w-full h-full"
+					bind:group={$headerStore.selected}
+					value={chrono.id}
+					type="checkbox"
+				/>
 				<a
 					href="/chrono/{chrono.id}"
 					class="flex gap-4 p-2 transition-colors rounded bg-slate-700 hover:bg-slate-600"
