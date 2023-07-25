@@ -1,2 +1,5 @@
 TODO
-settings slider decremental / incremental
+
+edit move
+edit delete
+delete
