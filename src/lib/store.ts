@@ -20,7 +20,7 @@ export type TimeNode = {
 	skipRepetitions: number[];
 	parentTitle?: string;
 	deep?: number;
-    totalTime?: number
+	totalTime?: number
 };
 
 export type LoopNode = {
@@ -75,6 +75,21 @@ function createChronoStore() {
 						pauseOnFinish: false,
 						color: '#f0f',
 						skipRepetitions: []
+					},
+					{
+						isLoop: true,
+						title: 'LOOP NODE',
+						loops: 5,
+						nodes: [
+							{
+								isLoop: false,
+								title: 'INSIDE LOOP XD',
+								duration: 10,
+								pauseOnFinish: false,
+								color: '#fff',
+								skipRepetitions: []
+							}
+						]
 					}
 				]
 			},

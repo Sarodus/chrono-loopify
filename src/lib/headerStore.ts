@@ -2,7 +2,7 @@ import { writable } from "svelte/store";
 
 export type HeaderStoreTypes = {
     size: 'sm' | 'md'
-    route: 'main' | 'chrono'
+    route: 'main' | 'chrono' | 'edit'
 
     // data
     search: string,

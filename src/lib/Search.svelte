@@ -3,8 +3,7 @@
 	import { slide } from 'svelte/transition';
 
 	export let value = '';
-
-	let open = false;
+	export let open = false;
 	let inputEl: HTMLInputElement;
 
 	async function onOpen() {
