@@ -3,8 +3,14 @@
 	import { nodesToTimeText } from '$lib/utils';
 	import chronoStore from '$lib/store';
 	import headerStore from '$lib/headerStore';
+	import { goto } from '$app/navigation';
 
 	headerStore.set({ size: 'md', route: 'main', search: '', selected: [] });
+
+	function addChrono() {
+		const id = chronoStore.createEmptyChrono();
+		goto(`/edit/${id}`);
+	}
 </script>
 
 <div class="container grid gap-4 px-4 mx-auto mt-10">
@@ -62,4 +68,6 @@
 			</div>
 		{/if}
 	{/each}
+
+	<button type="button" on:click={addChrono} class="h-full p-4 bg-slate-800">Add chrono</button>
 </div>
